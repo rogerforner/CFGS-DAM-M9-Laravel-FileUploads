@@ -35,7 +35,9 @@ class ProfileControllerTest extends DuskTestCase
                 ->type('email',$user['email'])
                 ->type('password',$user['password'])
                 ->attach('file', __DIR__ . '/photos/guapo.png')
-                    ->assertSee('Laravel');
+                ->press('Create')
+                
+                ->assertSee('Laravel');
         });
     }
 }
