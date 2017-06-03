@@ -25262,26 +25262,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
-        console.log('Component mounted.');
+        console.log('Component CreateUsersForm mounted.');
     },
     data: function data() {
         return {
             name: '',
-            password: '',
             email: '',
-            file: ''
+            password: ''
         };
     },
 
     methods: {
         submit: function submit() {
-            console.log('Submitting');
-            window.axios.post('api/v1/user', {
-                name: this.name,
-                email: this.email,
-                password: this.password,
-                file: this.file
-            }).then(function (response) {
+            var data = new FormData();
+            data.append('name', this.name);
+            data.append('email', this.email);
+            data.append('password', this.password);
+            data.append('file', document.getElementById('file').files[0]);
+            window.axios.post('/api/v1/user', data).then(function (response) {
                 console.log(response);
             }).catch(function (error) {
                 console.log(error);
@@ -25343,7 +25341,7 @@ Vue.component('register-form', __webpack_require__(62));
 Vue.component('login-form', __webpack_require__(61));
 Vue.component('email-reset-password-form', __webpack_require__(60));
 Vue.component('reset-password-form', __webpack_require__(63));
-Vue.component('create-user-form', __webpack_require__(64));
+Vue.component('create-users-form', __webpack_require__(64));
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -43636,7 +43634,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/alumne/Code/fileUploads/resources/assets/js/components/Example.vue"
+Component.options.__file = "/home/franc/Code/fileUploads/resources/assets/js/components/Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43674,7 +43672,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/alumne/Code/fileUploads/resources/assets/js/components/auth/EmailResetPasswordForm.vue"
+Component.options.__file = "/home/franc/Code/fileUploads/resources/assets/js/components/auth/EmailResetPasswordForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] EmailResetPasswordForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43712,7 +43710,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/alumne/Code/fileUploads/resources/assets/js/components/auth/LoginForm.vue"
+Component.options.__file = "/home/franc/Code/fileUploads/resources/assets/js/components/auth/LoginForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] LoginForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43750,7 +43748,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/alumne/Code/fileUploads/resources/assets/js/components/auth/RegisterForm.vue"
+Component.options.__file = "/home/franc/Code/fileUploads/resources/assets/js/components/auth/RegisterForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] RegisterForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43788,7 +43786,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/alumne/Code/fileUploads/resources/assets/js/components/auth/ResetPasswordForm.vue"
+Component.options.__file = "/home/franc/Code/fileUploads/resources/assets/js/components/auth/ResetPasswordForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ResetPasswordForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43822,7 +43820,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/alumne/Code/fileUploads/resources/assets/js/components/users/CreateUsersForm.vue"
+Component.options.__file = "/home/franc/Code/fileUploads/resources/assets/js/components/users/CreateUsersForm.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CreateUsersForm.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43946,10 +43944,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "create-users-form"
     }
   }, [_c('form', {
+    attrs: {
+      "accept-charset": "UTF-8",
+      "enctype": "multipart/form-data"
+    },
     on: {
       "submit": function($event) {
         $event.preventDefault();
-        _vm.submit()
+        _vm.submit($event)
       }
     }
   }, [_c('div', {
@@ -43966,10 +43968,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "name"
     }],
     attrs: {
+      "id": "name",
       "type": "text",
       "name": "name",
-      "id": "name",
-      "placeholder": "Name",
+      "placeholder": "Place your name here",
       "value": ""
     },
     domProps: {
@@ -43995,10 +43997,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "email"
     }],
     attrs: {
+      "id": "email",
       "type": "text",
       "name": "email",
-      "id": "email",
-      "placeholder": "Email",
+      "placeholder": "Place your email here",
       "value": ""
     },
     domProps: {
@@ -44024,10 +44026,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "password"
     }],
     attrs: {
+      "id": "password",
       "type": "password",
       "name": "password",
-      "id": "password",
-      "placeholder": "Password",
+      "placeholder": "Place your password here",
       "value": ""
     },
     domProps: {
@@ -44043,7 +44045,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "btn btn-primary",
     attrs: {
       "type": "submit",
-      "id": "create-users-button"
+      "id": "create-user-button"
     }
   }, [_vm._v("Create")])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -44055,10 +44057,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("File: ")]), _vm._v(" "), _c('input', {
     attrs: {
+      "id": "file",
       "type": "file",
       "name": "file",
-      "id": "file",
-      "placeholder": "File"
+      "value": ""
     }
   })])
 }]}

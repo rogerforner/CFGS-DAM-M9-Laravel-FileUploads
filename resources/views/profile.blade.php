@@ -21,7 +21,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <create-user-form></create-user-form>
+                        <create-users-form></create-users-form>
                     </div>
                     <!-- /.box-body -->
                 </div>
